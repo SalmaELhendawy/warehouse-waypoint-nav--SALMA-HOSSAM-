@@ -17,7 +17,7 @@ Return to the Charging Station (Home)
 Each goal is sent only after the previous goal succeeded. If any goal fails, the mission stops and reports the location of the failed goal.
 
 -----------------------------------------------------------------------------------------------------------------
-2. Repository and package structure
+2.## Repository and Package Structure
 
 warehouse-waypoint-nav-[SALMA-HOSSAM]/
 ├── robot_navigation/
@@ -50,7 +50,7 @@ warehouse-waypoint-nav-[SALMA-HOSSAM]/
 ├── images/
 └── README.md
 
----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------
 
 3. Workspace build instructions
 Inside The Terminal Write Commands below:
