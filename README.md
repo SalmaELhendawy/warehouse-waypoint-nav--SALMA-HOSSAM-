@@ -15,9 +15,10 @@ Navigate to the Shipping Station
 Return to the Charging Station (Home)
 
 Each goal is sent only after the previous goal succeeded. If any goal fails, the mission stops and reports the location of the failed goal.
+
 -----------------------------------------------------------------------------------------------------------------
 2. Repository and package structure
-   warehouse-waypoint-nav-[YOUR-NAME]/
+warehouse-waypoint-nav-[YOUR-NAME]/
 ├── robot_navigation/
 │   ├── config/
 │   │   ├── amcl.yaml
@@ -47,9 +48,12 @@ Each goal is sent only after the previous goal succeeded. If any goal fails, the
 │   └── setup.py
 ├── images/
 └── README.md
+
 ---------------------------------------------------------------------------------------------------
+
 3. Workspace build instructions
 Inside The Terminal Write Commands below:
+
 ```
 mkdir -p ~/warehouse_turtlebot3_ws/src
 cd ~/warehouse_turtlebot3_ws/src
@@ -59,6 +63,7 @@ colcon build --packages-select warehouse_slam robot_navigation warehouse_waypoin
 source install/setup.bash
 ```
 ----------------------------------------------------------------------------------------------------------
+
 4. How to launch TurtleBot3 inside the warehouse world
 The simulator is started from the platform UI, or with the warehouse launch file. The TurtleBot3 Burger is spawned at the Charging Station (Home), which is the origin of the map frame.
 
@@ -67,26 +72,28 @@ ros2 topic info /clock -v
 ros2 topic hz /scan                                    
 ros2 topic echo /scan --once --field header.frame_id   
 ros2 topic echo /odom --once --field child_frame_id    
-ros2 run tf2_tools view_frames                         
+ros2 run tf2_tools view_frames        
+
 --------------------------------------------------------------------------------------------------------------
 5. How to map the warehouse using SLAM Toolbox
  Use Terminal:
 
-   # Terminal 1
+  - Terminal 1
    ros2 launch warehouse_slam slam_toolbox.launch.py
    
-   # Terminal 2
+   - Terminal 2
    rviz2
    
-   # Terminal 3
+   - Terminal 3
    ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 SLAM Toolbox configuration highlights: use_sim_time: true, odom_frame: odom, base_frame: base_footprint, map_frame: map, scan_topic: /scan, max_laser_range: 10.0.
 Drive through every accessible aisle, explore the walls, corners and open areas, and avoid duplicated walls and large unexplored gaps. Confirm in RViz (Fixed Frame = map) that the robot pose moves correctly on the map and that the TF tree is map -> odom -> base_footprint.
 
 ---------------------------------------------------------------------------------------------------------------------
+
 6. How to save the warehouse map
-   In terminal:
+In terminal:
 ```
 ros2 run nav2_map_server map_saver_cli -f warehouse_map
 ```
@@ -98,6 +105,7 @@ warehouse_map.pgm
 The saved map is reloaded by the map server and displayed in RViz to confirm it is correct.
 
 -------------------------------------------------------------------------------------------------------------------
+
 7. How to launch and test AMCL localization
 AMCL and the map server are started by amcl2.launch.py . SLAM Toolbox must be closed, otherwise both publish map -> odom.
 ```
@@ -150,6 +158,7 @@ Confirm /cmd_vel uses geometry_msgs/msg/Twist:
 ros2 topic info /cmd_vel
 
 Main Nav2 configuration: DWB local planner (max speed 0.22 m/s, robot_radius: 0.12), NavFn global planner, inflation radius 0.2 m for narrow aisles, costmap laser range 3.5 / 3.0 m while AMCL uses the full 10 m range.
+
 ---------------------------------------------------------------------------------------------------------
 
 9. Waypoint names, positions and orientations
@@ -167,6 +176,7 @@ All poses are in the map frame (yaw in radians). They are defined in WAYPOINTS a
   Charging Station (Home) -> Loading Station -> wait 30 s -> Storage Area -> Shipping Station -> Charging Station (Home)
 
 The mission starts only after Nav2 and AMCL are active and the robot is localized at the Charging Station (the node publishes the Home initial pose and waits with waitUntilNav2Active). It then sends one NavigateToPose goal at a time and waits for each Nav2 result before sending the next goal. If a goal fails, the node stops the mission and reports the failed location.
+
 -------------------------------------------
 In Terminal:
 
@@ -221,6 +231,7 @@ Example:
 
 > Real Output Found in Screenshots Section <
 While driving, the node also prints the remaining distance every 5 seconds, for example distance remaining: 8.07 m.
+
 -----------------------------------------------------------------------------------------------------------------
 
 13. Problems encountered and their solutions:
@@ -240,7 +251,7 @@ While driving, the node also prints the remaining distance every 5 seconds, for 
 | 11 | RViz GLSL link result error in the log                    | Software rendering in the cloud instance                             | Cosmetic; the map and displays render correctly                          |
 | 12 | Home marker started blue although it is the first location | The initial MarkerArray was published without an active goal         | Initial MarkerArray now publishes Home as active, and all markers return to blue when the mission completes |
 
-
+----------------------------------------------------------------------------------------------------------
 14. Screenshots
 ----------------------------------------------------------------------------------------------------------
 15. Demonstration video
