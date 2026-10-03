@@ -18,7 +18,8 @@ Each goal is sent only after the previous goal succeeded. If any goal fails, the
 
 -----------------------------------------------------------------------------------------------------------------
 2. Repository and package structure
-warehouse-waypoint-nav-[YOUR-NAME]/
+
+warehouse-waypoint-nav-[SALMA-HOSSAM]/
 ├── robot_navigation/
 │   ├── config/
 │   │   ├── amcl.yaml
