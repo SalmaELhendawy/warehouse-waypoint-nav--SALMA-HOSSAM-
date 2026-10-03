@@ -224,22 +224,22 @@ While driving, the node also prints the remaining distance every 5 seconds, for 
 -----------------------------------------------------------------------------------------------------------------
 
 13. Problems encountered and their solutions:
+
 | #  | Problem                                                   | Cause                                                                 | Solution                                                                 |
 |----|-----------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------------|
-| 1  | Message Filter dropping message and jumping TF            | Duplicate /clock publisher. Use_sim_time missing on some nodes. Stale Gazebo processes. | One /clock publisher (ros2 topic info /clock -v). Use_sim_time: true on every node. Kill old gz sim / bridge processes before every restart. |
-| 2  | TF tree stopped at odom -> base_footprint (no base_link, base_scan) | Robot_state_publisher crashed because the URDF began with a stray Markdown line (```xml). | Cleaned the URDF file. Verified with view_frames. |
-| 3  | Launch failed with KeyError: TURTLEBOT3_MODEL             | The original TurtleBot3 launch files read the environment variable at import time. | Model, URDF and bridge paths are written directly for the Burger. |
-| 4  | SLAM and AMCL saw very little in a large warehouse        | Default LiDAR range was only 3 m. | LiDAR <max> raised to 10 m in the SDF. AMCL laser_max_range and SLAM max_laser_range matched. |
-| 5  | Robot could not pass narrow aisles                        | Large inflation radius blocked the corridors. | Costmap inflation radius reduced to 0.2 m. Costmap laser range kept short (3.5 / 3.0 m). |
-| 6  | Failed to make progress in tight aisles                   | Movement_time_allowance too short. | Nav2 recovery cleared the costmap and the goal succeeded. The allowance was increased. |
-| 7  | Timed out while waiting for action server to acknowledge goal request | The BT server timeout (20 ms) was too small under CPU load. | Default_server_timeout raised to 100. Debug_trajectory_details set to False. |
-| 8  | Local costmap invisible and colors pale in RViz           | Costmap displays used Volatile durability. Identical names and alpha. | Set Transient Local. Separate names and alpha for the global and local costmaps. |
-| 9  | /particle_cloud incompatible QoS warning                  | RViz subscribed Reliable. AMCL publishes Best Effort. | ParticleCloud reliability set to Best Effort. |
-| 10 | Two launch files started the same nodes                   | Localization and Nav2 launch files both started map_server and amcl. | A single nav2_bringup.launch.py starts everything. |
-| 11 | RViz GLSL link result error in the log                    | Software rendering in the cloud instance. | Cosmetic. The map and displays render correctly. |
-| 12 | Home marker started blue although it is the first location | The initial MarkerArray was published without an active goal. | Initial MarkerArray now publishes Home as active. All markers return to blue when the mission completes. |
+| 1  | Message Filter dropping message and jumping TF            | Duplicate /clock publisher, use_sim_time missing on some nodes, stale Gazebo processes | One /clock publisher (ros2 topic info /clock -v), use_sim_time: true on every node, kill old gz sim / bridge processes before every restart |
+| 2  | TF tree stopped at odom -> base_footprint (no base_link, base_scan) | robot_state_publisher crashed because the URDF began with a stray Markdown line (```xml) | Cleaned the URDF file and verified with view_frames                      |
+| 3  | Launch failed with KeyError: TURTLEBOT3_MODEL             | The original TurtleBot3 launch files read the environment variable at import time | Model, URDF and bridge paths are written directly for the Burger          |
+| 4  | SLAM and AMCL saw very little in a large warehouse        | Default LiDAR range was only 3 m                                     | LiDAR <max> raised to 10 m in the SDF, with AMCL laser_max_range and SLAM max_laser_range matched |
+| 5  | Robot could not pass narrow aisles                        | Large inflation radius blocked the corridors                         | Costmap inflation radius reduced to 0.2 m and costmap laser range kept short (3.5 / 3.0 m) |
+| 6  | Failed to make progress in tight aisles                   | movement_time_allowance too short                                    | Nav2 recovery cleared the costmap and the goal succeeded; the allowance was increased |
+| 7  | Timed out while waiting for action server to acknowledge goal request | The BT server timeout (20 ms) was too small under CPU load           | default_server_timeout raised to 100 and debug_trajectory_details set to False |
+| 8  | Local costmap invisible and colors pale in RViz           | Costmap displays used Volatile durability and identical names and alpha | Set Transient Local, separate names and alpha for the global and local costmaps |
+| 9  | /particle_cloud incompatible QoS warning                  | RViz subscribed Reliable, AMCL publishes Best Effort                 | ParticleCloud reliability set to Best Effort                             |
+| 10 | Two launch files started the same nodes                   | Localization and Nav2 launch files both started map_server and amcl  | A single nav2_bringup.launch.py starts everything                        |
+| 11 | RViz GLSL link result error in the log                    | Software rendering in the cloud instance                             | Cosmetic; the map and displays render correctly                          |
+| 12 | Home marker started blue although it is the first location | The initial MarkerArray was published without an active goal         | Initial MarkerArray now publishes Home as active, and all markers return to blue when the mission completes |
 
------------------------------------------------------------------------------------------------------------------------
 
 14. Screenshots
 ----------------------------------------------------------------------------------------------------------
