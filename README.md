@@ -260,12 +260,15 @@ Mapping (SLAM Toolbox)
 <img width="757" height="299" alt="slam mapping" src="https://github.com/user-attachments/assets/bda8241a-84b9-43fa-8bbf-a1e3bd9f117e" />
 
 Saved warehouse map
+
 <img width="617" height="311" alt="Screenshot 2026-10-03 143640" src="https://github.com/user-attachments/assets/9d82a7c4-51cc-4227-a287-dc2e64d51670" />
 
 Final Map
+
 <img width="476" height="279" alt="map2" src="https://github.com/user-attachments/assets/62eb7013-9005-4e7d-840e-ea1b4b78b44a" />
 
 AMCL localization (scan aligned with the walls, particle cloud converged)
+
 <img width="955" height="326" alt="correct intial pose" src="https://github.com/user-attachments/assets/1328260f-ddbd-423d-bd32-a2bc587c09f7" />
 
 Navigation: global and local costmaps
@@ -275,15 +278,19 @@ Navigation: global and local costmaps
 <img width="312" height="223" alt="local costmap" src="https://github.com/user-attachments/assets/de92c126-0df0-4050-89f4-1320fae5e8a3" />
 
 Navigation: global plan and local plan
+
 <img width="310" height="232" alt="global plan" src="https://github.com/user-attachments/assets/41fd2c06-aeaa-47b6-899b-6c4d908f2a77" />
 
 All named waypoint markers
+
 <img width="364" height="216" alt="stations" src="https://github.com/user-attachments/assets/a5c7c3af-a2ce-4b2b-a887-f5083c167d0f" />
 
 Active goal in green -Other waypoints in blue
+
 <img width="422" height="287" alt="loading station" src="https://github.com/user-attachments/assets/c18eecf5-ab09-4042-b05b-aaf2dda8983d" />
 
 /waypoint_markers topic in RViz
+
 <img width="304" height="213" alt="rviz markers" src="https://github.com/user-attachments/assets/08894101-ad09-45ec-ba59-d08861a36f83" />
 
 ----------------------------------------------------------------------------------------------------------
