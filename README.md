@@ -295,4 +295,12 @@ Active goal in green -Other waypoints in blue
 
 ----------------------------------------------------------------------------------------------------------
 15. Demonstration video
+ Narrated video of the complete project (warehouse setup, SLAM Toolbox mapping, AMCL, Nav2, the complete autonomous mission and the RViz waypoint markers:
+    
+
+https://github.com/user-attachments/assets/24eca958-c596-4198-b3a1-be100389c4d8
+
+
+
+
 
